@@ -53,7 +53,7 @@ def get_privacy_intro_keyboard() -> InlineKeyboardMarkup:
 def get_privacy_warning_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="▶️ Начнём", callback_data="privacy:start_questions")],
-        [InlineKeyboardButton(text="🔙 Назад", callback_data="website:intro")],
+        [InlineKeyboardButton(text="🔙 Назад", callback_data="website:intro")],  # ← Возврат в меню сайта
     ])
 
 
@@ -98,13 +98,13 @@ def get_next_question_index(current_index: int, answers: dict, questions: list) 
         q = questions[i]
         if "conditional" in q and "show_if" in q["conditional"]:
             condition = q["conditional"]["show_if"]
-            if isinstance(condition.get("show_if", {}).get("operator_type"), list):
-                # Специальная обработка для списков значений
-                key = list(condition["show_if"].keys())[0]
-                allowed_values = condition["show_if"][key]
+            key = list(condition.keys())[0]
+            allowed_values = condition[key]
+
+            if isinstance(allowed_values, list):
                 if answers.get(key) not in allowed_values:
                     continue
-            elif not all(answers.get(key) == value for key, value in condition["show_if"].items()):
+            elif not all(answers.get(k) == v for k, v in condition.items()):
                 continue
         return i
     return -1
@@ -235,20 +235,28 @@ async def on_questionnaire_complete(callback: types.CallbackQuery, fsm: FSMConte
     )
 
 
-@router.callback_query(F.data == "category:website")
-async def on_website_selected(callback: types.CallbackQuery):
+# =============================================================================
+# ХЕНДЛЕРЫ (ОБРАТИ ВНИМАНИЕ НА CALLBACK_DATA)
+# =============================================================================
+
+@router.callback_query(F.data == "doc:website_privacy")  # ✅ ИСПРАВЛЕНО: было "category:website"
+async def on_privacy_selected(callback: types.CallbackQuery):
+    """Хендлер для кнопки «Политика ПД» в меню сайта"""
     await show_privacy_intro(callback, check_sub=True)
 
 
 @router.callback_query(F.data == "website:intro")
 async def on_website_intro_back(callback: types.CallbackQuery, fsm: FSMContext):
+    """Кнопка «Назад» из документа — возвращает в меню сайта"""
     await fsm.clear()
     await show_privacy_intro(callback, check_sub=False)
+    await callback.answer()
 
 
 @router.callback_query(F.data == "privacy:fill")
 async def on_privacy_fill_selected(callback: types.CallbackQuery):
     await show_privacy_warning(callback)
+    await callback.answer()
 
 
 @router.callback_query(F.data == "privacy:start_questions")
@@ -256,6 +264,7 @@ async def on_privacy_start_questions(callback: types.CallbackQuery, fsm: FSMCont
     await fsm.set_state(PrivacyForm.answering)
     await fsm.update_data(answers={}, current_question_index=0)
     await show_question(callback, fsm, 0)
+    await callback.answer()
 
 
 @router.callback_query(PrivacyForm.answering, F.data.startswith("ans:"))
@@ -293,6 +302,7 @@ async def handle_answer(callback: types.CallbackQuery, fsm: FSMContext):
         await on_questionnaire_complete(callback, fsm)
     else:
         await show_question(callback, fsm, next_idx)
+    await callback.answer()
 
 
 @router.callback_query(F.data == "privacy:complete")
