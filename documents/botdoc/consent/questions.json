@@ -1,0 +1,161 @@
+[
+  {
+    "step": "bot_name",
+    "text": "🤖 Название бота:",
+    "type": "text",
+    "required": true,
+    "example": "Мой помощник",
+    "hint": "Как называется ваш бот"
+  },
+  {
+    "step": "bot_username",
+    "text": "🔗 Юзернейм бота (ссылка):",
+    "type": "text",
+    "required": true,
+    "example": "@mybot",
+    "hint": "Например: @mybot"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Владелец бота — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование владельца:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН владельца:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП владельца:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес владельца:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "privacy@mybot.ru"
+  },
+  {
+    "step": "data_purposes",
+    "text": "🎯 Для чего собираете данные? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Предоставление функционала бота",
+      "✅ Обратная связь с пользователем",
+      "✅ Рассылка уведомлений",
+      "✅ Аналитика и улучшение бота",
+      "✅ Идентификация пользователя",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_purposes_other",
+    "text": "📝 Укажите другие цели:",
+    "type": "text",
+    "required": false,
+    "example": "Проведение опросов, персонализация",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "data_purposes": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "consent_duration",
+    "text": "⏱️ На какой срок даётся согласие:",
+    "type": "single_select",
+    "options": [
+      "До отзыва пользователем",
+      "3 года",
+      "5 лет",
+      "Другой срок (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "consent_duration_custom",
+    "text": "📝 Укажите срок:",
+    "type": "text",
+    "required": false,
+    "example": "1 год с момента первого запуска бота",
+    "hint": "Напишите срок полностью",
+    "conditional": {
+      "show_if": {
+        "consent_duration": "Другой срок (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "withdrawal_method",
+    "text": "📬 Как пользователь может отозвать согласие:",
+    "type": "single_select",
+    "options": [
+      "✅ По письму на email",
+      "✅ Через команду в боте",
+      "✅ Через личные сообщения боту",
+      "✅ Другой способ (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "withdrawal_method_custom",
+    "text": "📝 Укажите способ отзыва:",
+    "type": "text",
+    "required": false,
+    "example": "Через команду /delete_data в боте",
+    "hint": "Если выбрали «Другой» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "withdrawal_method": "✅ Другой способ (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "data_storage_location",
+    "text": "🌍 Где хранятся данные:",
+    "type": "single_select",
+    "options": [
+      "🇷🇺 Только на серверах в РФ",
+      "🌐 На серверах в РФ и за рубежом"
+    ],
+    "required": true
+  }
+]

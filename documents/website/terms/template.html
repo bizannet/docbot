@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользовательское соглашение</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 1cm;
+            color: #000;
+        }
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5cm;
+        }
+        h2 {
+            font-size: 12pt;
+            margin-top: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+        p {
+            text-align: justify;
+            margin: 0.2cm 0;
+        }
+        ul {
+            margin: 0.2cm 0;
+            padding-left: 1cm;
+        }
+        li {
+            margin-bottom: 0.1cm;
+        }
+        .section {
+            margin-bottom: 0.5cm;
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 1cm;
+        }
+        .variable {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h1>
+        <p>сайта <span class="variable">{{ site_name }}</span> (<span class="variable">{{ site_url }}</span>)</p>
+    </div>
+
+    <div class="section">
+        <h2>1. ОБЩИЕ ПОЛОЖЕНИЯ</h2>
+        <p>1.1. Настоящее Пользовательское соглашение (далее — Соглашение) регулирует отношения между владельцем сайта <span class="variable">{{ site_name }}</span> (далее — Владелец) и пользователем (далее — Пользователь) при использовании сайта <span class="variable">{{ site_url }}</span>.</p>
+        <p>1.2. Владелец сайта: <span class="variable">{{ operator_name }}</span> (ИНН <span class="variable">{{ operator_inn }}</span>{% if operator_ogrn %}, ОГРН/ОГРНИП <span class="variable">{{ operator_ogrn }}</span>{% endif %}), адрес: <span class="variable">{{ operator_address }}</span>.</p>
+        <p>1.3. Использование сайта означает полное и безоговорочное принятие условий настоящего Соглашения.</p>
+        <p>1.4. Владелец оставляет за собой право изменять условия Соглашения в любое время. Новая редакция вступает в силу с момента публикации на сайте{% if agreement_changes == "✅ Уведомление на email" or agreement_changes == "✅ И то, и другое" %} и/или направления уведомления на email{% endif %}.</p>
+    </div>
+
+    <div class="section">
+        <h2>2. ПРЕДМЕТ СОГЛАШЕНИЯ</h2>
+        <p>2.1. Сайт предназначен для: <span class="variable">{{ site_purpose | join(', ') }}</span>{% if site_purpose_other %}, {{ site_purpose_other }}{% endif %}.</p>
+        <p>2.2. Владелец предоставляет Пользователю доступ к функционалу сайта на условиях настоящего Соглашения.</p>
+        <p>2.3. Владелец не гарантирует, что сайт будет работать бесперебойно и без ошибок. Техническая поддержка осуществляется в рабочем порядке.</p>
+    </div>
+
+    <div class="section">
+        <h2>3. ОБЯЗАННОСТИ ПОЛЬЗОВАТЕЛЯ</h2>
+        <p>3.1. Пользователь обязуется:</p>
+        <ul>
+            {% for obligation in user_obligations %}
+            <li>{{ obligation }}</li>
+            {% endfor %}
+            {% if user_obligations_other %}
+            <li>{{ user_obligations_other }}</li>
+            {% endif %}
+        </ul>
+        <p>3.2. Пользователь несёт ответственность за достоверность предоставляемой информации.</p>
+    </div>
+
+    <div class="section">
+        <h2>4. ЗАПРЕЩЁННЫЕ ДЕЙСТВИЯ</h2>
+        <p>4.1. На сайте запрещено:</p>
+        <ul>
+            {% for action in prohibited_actions %}
+            <li>{{ action }}</li>
+            {% endfor %}
+            {% if prohibited_actions_other %}
+            <li>{{ prohibited_actions_other }}</li>
+            {% endif %}
+        </ul>
+        <p>4.2. Владелец вправе ограничить или прекратить доступ пользователя к сайту при нарушении настоящих правил без предварительного уведомления.</p>
+    </div>
+
+    <div class="section">
+        <h2>5. ИНТЕЛЛЕКТУАЛЬНАЯ СОБСТВЕННОСТЬ</h2>
+        <p>5.1. Все материалы сайта (тексты, изображения, логотипы, код) являются объектами интеллектуальной собственности Владельца или третьих лиц.</p>
+        <p>5.2. Копирование, распространение или использование контента сайта без письменного разрешения Владельца запрещено.</p>
+        <p>5.3. Пользователь может использовать материалы сайта только в личных некоммерческих целях, если иное не предусмотрено функционалом сайта.</p>
+    </div>
+
+    <div class="section">
+        <h2>6. ОТВЕТСТВЕННОСТЬ</h2>
+        <p>6.1. Владелец не несёт ответственности:</p>
+        <ul>
+            {% if liability_limit == "✅ Владелец не несёт ответственности за действия пользователей" or liability_limit == "✅ Все вышеперечисленное" %}
+            <li>За действия или бездействие Пользователей при использовании сайта;</li>
+            {% endif %}
+            {% if liability_limit == "✅ Владелец не гарантирует бесперебойную работу сайта" or liability_limit == "✅ Все вышеперечисленное" %}
+            <li>За технические сбои, ошибки или недоступность сайта;</li>
+            {% endif %}
+            {% if liability_limit == "✅ Владелец не отвечает за контент третьих лиц" or liability_limit == "✅ Все вышеперечисленное" %}
+            <li>За контент, размещённый третьими лицами на сайте или по ссылкам с сайта;</li>
+            {% endif %}
+        </ul>
+        <p>6.2. Владелец не гарантирует, что использование сайта будет соответствовать ожиданиям Пользователя.</p>
+    </div>
+
+    <div class="section">
+        <h2>7. РАЗРЕШЕНИЕ СПОРОВ</h2>
+        <p>7.1. Все споры между Владельцем и Пользователем разрешаются {% if dispute_resolution == "✅ Досудебный порядок (претензия)" %}в досудебном порядке путём направления претензии на email <span class="variable">{{ contact_email }}</span>. Срок рассмотрения претензии — 30 дней.{% elif dispute_resolution == "✅ Суд по месту нахождения владельца" %}в суде по месту нахождения Владельца.{% elif dispute_resolution == "✅ Суд по месту жительства пользователя" %}в суде по месту жительства Пользователя.{% elif dispute_resolution == "✅ Арбитраж" %}в арбитражном суде.{% endif %}</p>
+        <p>7.2. К отношениям, не урегулированным настоящим Соглашением, применяется действующее законодательство.</p>
+    </div>
+
+    <div class="section">
+        <h2>8. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h2>
+        <p>8.1. Настоящее Соглашение вступает в силу с момента его публикации на сайте.</p>
+        <p>8.2. Актуальная версия Соглашения доступна по адресу: <span class="variable">{{ site_url }}/terms</span></p>
+        <p>8.3. Контактные данные Владельца для обращений:</p>
+        <ul>
+            <li>Email: <span class="variable">{{ contact_email }}</span></li>
+            <li>Адрес: <span class="variable">{{ operator_address }}</span></li>
+        </ul>
+    </div>
+
+    <div class="section" style="margin-top: 1cm;">
+        <p>Дата публикации: <span class="variable">{{ agreement_date }}</span></p>
+    </div>
+</body>
+</html>

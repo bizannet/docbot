@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Политика конфиденциальности</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 1cm;
+            color: #000;
+        }
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5cm;
+        }
+        h2 {
+            font-size: 12pt;
+            margin-top: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+        p {
+            text-align: justify;
+            margin: 0.2cm 0;
+        }
+        ul {
+            margin: 0.2cm 0;
+            padding-left: 1cm;
+        }
+        li {
+            margin-bottom: 0.1cm;
+        }
+        .section {
+            margin-bottom: 0.5cm;
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 1cm;
+        }
+        .variable {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</h1>
+        <p>в отношении обработки персональных данных пользователей сайта <span class="variable">{{ site_url }}</span></p>
+    </div>
+
+    <div class="section">
+        <h2>1. ОБЩИЕ ПОЛОЖЕНИЯ</h2>
+        <p>1.1. Настоящая Политика конфиденциальности (далее — Политика) действует в отношении всей информации, которую сайт <span class="variable">{{ site_name }}</span> (далее — Сайт) может получить о пользователе во время использования им Сайта.</p>
+        <p>1.2. Оператором персональных данных является <span class="variable">{{ operator_name }}</span> (ИНН <span class="variable">{{ operator_inn }}</span>{% if operator_ogrn %}, ОГРН/ОГРНИП <span class="variable">{{ operator_ogrn }}</span>{% endif %}), адрес: <span class="variable">{{ operator_address }}</span>.</p>
+        <p>1.3. Обработка персональных данных осуществляется в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+    </div>
+
+    <div class="section">
+        <h2>2. ЦЕЛИ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ</h2>
+        <p>2.1. Персональные данные пользователей обрабатываются в следующих целях:</p>
+        <ul>
+            {% for purpose in processing_purposes %}
+            <li>{{ purpose }}</li>
+            {% endfor %}
+            {% if processing_purposes_other %}
+            <li>{{ processing_purposes_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. ПЕРЕЧЕНЬ ПЕРСОНАЛЬНЫХ ДАННЫХ</h2>
+        <p>3.1. Сайт собирает и обрабатывает следующие персональные данные:</p>
+        <ul>
+            {% for data in data_collected %}
+            <li>{{ data }}</li>
+            {% endfor %}
+            {% if data_collected_other %}
+            <li>{{ data_collected_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. СРОК ХРАНЕНИЯ ДАННЫХ</h2>
+        <p>4.1. Персональные данные хранятся в течение: <span class="variable">{{ data_retention }}{% if data_retention_custom %} ({{ data_retention_custom }}){% endif %}</span>.</p>
+        <p>4.2. По истечении срока хранения данные подлежат уничтожению или обезличиванию.</p>
+    </div>
+
+    <div class="section">
+        <h2>5. ПЕРЕДАЧА ДАННЫХ ТРЕТЬИМ ЛИЦАМ</h2>
+        {% if third_parties == "❌ Нет, не передаём" %}
+        <p>5.1. Оператор не передаёт персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</p>
+        {% else %}
+        <p>5.1. Оператор может передавать персональные данные следующим третьим лицам:</p>
+        <p class="variable">{{ third_parties_list }}</p>
+        <p>5.2. Передача данных осуществляется только с согласия пользователя и в соответствии с законодательством РФ.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>6. ТРАНСГРАНИЧНАЯ ПЕРЕДАЧА</h2>
+        {% if cross_border == "✅ Да" %}
+        <p>6.1. Оператор осуществляет трансграничную передачу персональных данных. Передача осуществляется в страны, обеспечивающие адекватную защиту прав субъектов персональных данных, или при наличии согласия субъекта.</p>
+        {% else %}
+        <p>6.1. Трансграничная передача персональных данных не осуществляется. Все данные хранятся и обрабатываются на территории Российской Федерации.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>7. COOKIE-ФАЙЛЫ</h2>
+        {% if cookies_policy == "✅ Да" %}
+        <p>7.1. Сайт использует cookie-файлы для улучшения работы Сайта, анализа трафика и персонализации контента.</p>
+        <p>7.2. Пользователь может отключить cookie-файлы в настройках своего браузера.</p>
+        {% else %}
+        <p>7.1. Сайт не использует cookie-файлы.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>8. КОНТАКТЫ</h2>
+        <p>8.1. Для вопросов, связанных с обработкой персональных данных, вы можете обратиться:</p>
+        <ul>
+            <li>Email: <span class="variable">{{ contact_email }}</span></li>
+            {% if contact_phone %}
+            <li>Телефон: <span class="variable">{{ contact_phone }}</span></li>
+            {% endif %}
+            <li>Адрес: <span class="variable">{{ operator_address }}</span></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h2>
+        <p>9.1. Политика вступает в силу с момента её размещения на Сайте.</p>
+        <p>9.2. Оператор оставляет за собой право вносить изменения в Политику. Новая редакция вступает в силу с момента размещения на Сайте.</p>
+        <p>9.3. Актуальная версия Политики доступна по адресу: <span class="variable">{{ site_url }}/privacy</span></p>
+    </div>
+
+    <div class="section" style="margin-top: 1cm;">
+        <p>Дата публикации: <span class="variable">{{ policy_date }}</span></p>
+    </div>
+</body>
+</html>

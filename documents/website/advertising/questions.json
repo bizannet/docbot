@@ -1,0 +1,178 @@
+[
+  {
+    "step": "site_name",
+    "text": "🌐 Название сайта:",
+    "type": "text",
+    "required": true,
+    "example": "Мой интернет-магазин",
+    "hint": "Как называется ваш сайт"
+  },
+  {
+    "step": "site_url",
+    "text": "🔗 Адрес сайта (домен):",
+    "type": "text",
+    "required": true,
+    "example": "https://mysite.ru",
+    "hint": "Полный адрес с https://"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Владелец сайта — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование владельца:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН владельца:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП владельца:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес владельца:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "support@mysite.ru"
+  },
+  {
+    "step": "advertising_tools",
+    "text": "📊 Какие рекламные инструменты используете? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Яндекс.Метрика",
+      "✅ Яндекс.Директ",
+      "✅ Google Analytics (заменён на Яндекс)",
+      "✅ Пиксель ВКонтакте",
+      "✅ Таргетированная реклама",
+      "✅ Ретаргетинг",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "advertising_tools_other",
+    "text": "📝 Укажите другие инструменты:",
+    "type": "text",
+    "required": false,
+    "example": "MyTarget, TikTok Pixel",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "advertising_tools": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "cookie_types",
+    "text": "🍪 Какие cookie-файлы используете? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Необходимые (для работы сайта)",
+      "✅ Аналитические (сбор статистики)",
+      "✅ Рекламные (таргетинг)",
+      "✅ Функциональные (настройки пользователя)",
+      "✅ Сторонние (сервисы аналитики)"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_collected",
+    "text": "📋 Какие данные собираются для рекламы? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ IP-адрес",
+      "✅ Информация о браузере",
+      "✅ Информация об устройстве",
+      "✅ Посещённые страницы",
+      "✅ Время на сайте",
+      "✅ Действия на сайте (клики, прокрутка)",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_collected_other",
+    "text": "📝 Укажите другие данные:",
+    "type": "text",
+    "required": false,
+    "example": "Геолокация, реферер",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "data_collected": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "cookie_consent_method",
+    "text": "✅ Как получаете согласие на cookie:",
+    "type": "single_select",
+    "options": [
+      "✅ Всплывающее окно при первом визите",
+      "✅ Галочка в форме",
+      "✅ Продолжение использования сайта = согласие",
+      "✅ Все вышеперечисленное"
+    ],
+    "required": true
+  },
+  {
+    "step": "opt_out_method",
+    "text": "🚫 Как пользователь может отказаться:",
+    "type": "single_select",
+    "options": [
+      "✅ Настройки в браузере",
+      "✅ Настройки на сайте",
+      "✅ По запросу на email",
+      "✅ Все способы"
+    ],
+    "required": true
+  },
+  {
+    "step": "third_party_sharing",
+    "text": "🤝 Передаёте ли данные рекламным партнёрам?",
+    "type": "single_select",
+    "options": [
+      "❌ Нет, не передаём",
+      "✅ Да, только агрегированные данные",
+      "✅ Да, в том числе персональные"
+    ],
+    "required": true
+  }
+]

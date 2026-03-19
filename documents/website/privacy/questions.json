@@ -1,0 +1,210 @@
+[
+  {
+    "step": "site_name",
+    "text": "🌐 Название сайта:",
+    "type": "text",
+    "required": true,
+    "example": "Мой интернет-магазин",
+    "hint": "Как называется ваш сайт"
+  },
+  {
+    "step": "site_url",
+    "text": "🔗 Адрес сайта (домен):",
+    "type": "text",
+    "required": true,
+    "example": "https://mysite.ru",
+    "hint": "Полный адрес с https://"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Оператор персональных данных — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true,
+    "hint": "Выберите ваш статус"
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование оператора:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»",
+    "hint": "Как вы указаны в ЕГРИП/ЕГРЮЛ или ФИО полностью"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН оператора:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП оператора:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес оператора:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений по ПД:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "privacy@mysite.ru"
+  },
+  {
+    "step": "contact_phone",
+    "text": "📞 Телефон для обращений (необязательно):",
+    "type": "text",
+    "required": false,
+    "validate": "phone",
+    "example": "+7 (999) 123-45-67",
+    "skip_button": true
+  },
+  {
+    "step": "data_collected",
+    "text": "📋 Какие данные вы собираете? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Имя / Фамилия",
+      "✅ Номер телефона",
+      "✅ Email",
+      "✅ Cookie и данные об устройстве",
+      "✅ Адрес доставки",
+      "✅ Платёжные данные",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true,
+    "hint": "Отметьте всё, что собирает ваш сайт"
+  },
+  {
+    "step": "data_collected_other",
+    "text": "📝 Укажите другие данные:",
+    "type": "text",
+    "required": false,
+    "example": "Дата рождения, предпочтения",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "data_collected": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "processing_purposes",
+    "text": "🎯 Для чего вы обрабатываете данные? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Оформление заказов",
+      "✅ Обратная связь с пользователем",
+      "✅ Рассылка новостей и акций",
+      "✅ Аналитика и улучшение сайта",
+      "✅ Идентификация пользователя",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "processing_purposes_other",
+    "text": "📝 Укажите другие цели:",
+    "type": "text",
+    "required": false,
+    "example": "Проведение опросов, персонализация контента",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "processing_purposes": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "data_retention",
+    "text": "⏱️ Как долго храните данные пользователей:",
+    "type": "single_select",
+    "options": [
+      "До отзыва согласия пользователем",
+      "3 года",
+      "5 лет",
+      "Другой срок (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_retention_custom",
+    "text": "📝 Укажите срок хранения:",
+    "type": "text",
+    "required": false,
+    "example": "1 год с момента последнего визита",
+    "hint": "Напишите срок полностью",
+    "conditional": {
+      "show_if": {
+        "data_retention": "Другой срок (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "third_parties",
+    "text": "🤝 Передаёте ли вы данные третьим лицам?",
+    "type": "single_select",
+    "options": [
+      "❌ Нет, не передаём",
+      "✅ Да, перечислю кому"
+    ],
+    "required": true
+  },
+  {
+    "step": "third_parties_list",
+    "text": "📝 Кому передаёте данные:",
+    "type": "text",
+    "required": false,
+    "example": "Платёжные системы, службы доставки, Яндекс.Метрика",
+    "hint": "Перечислите всех, кому могут передаваться данные",
+    "conditional": {
+      "show_if": {
+        "third_parties": "✅ Да, перечислю кому"
+      }
+    }
+  },
+  {
+    "step": "cross_border",
+    "text": "🌍 Осуществляете ли трансграничную передачу данных?",
+    "type": "single_select",
+    "options": [
+      "❌ Нет",
+      "✅ Да"
+    ],
+    "required": true,
+    "hint": "Если серверы или сервисы находятся за пределами РФ"
+  },
+  {
+    "step": "cookies_policy",
+    "text": "🍪 Используете ли вы cookie-файлы?",
+    "type": "single_select",
+    "options": [
+      "✅ Да",
+      "❌ Нет"
+    ],
+    "required": true
+  }
+]

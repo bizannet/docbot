@@ -1,0 +1,21 @@
+# Секреты (НИКОГДА не загружаем!)
+.env
+
+# Виртуальное окружение
+venv/
+env/
+
+# Логи и база данных
+logs/
+stats/
+*.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.idea/
+.vscode/
+*.swp

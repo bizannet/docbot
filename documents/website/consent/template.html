@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Согласие на обработку персональных данных</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 1cm;
+            color: #000;
+        }
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5cm;
+        }
+        h2 {
+            font-size: 12pt;
+            margin-top: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+        p {
+            text-align: justify;
+            margin: 0.2cm 0;
+        }
+        ul {
+            margin: 0.2cm 0;
+            padding-left: 1cm;
+        }
+        li {
+            margin-bottom: 0.1cm;
+        }
+        .section {
+            margin-bottom: 0.5cm;
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 1cm;
+        }
+        .variable {
+            font-weight: bold;
+        }
+        .checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #000;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>СОГЛАСИЕ</h1>
+        <p>на обработку персональных данных</p>
+        <p>пользователей сайта <span class="variable">{{ site_url }}</span></p>
+    </div>
+
+    <div class="section">
+        <p>Я, действуя свободно, своей волей и в своём интересе, а также подтверждая свою дееспособность, даю своё согласие <span class="variable">{{ operator_name }}</span> (ИНН <span class="variable">{{ operator_inn }}</span>{% if operator_ogrn %}, ОГРН/ОГРНИП <span class="variable">{{ operator_ogrn }}</span>{% endif %}), адрес: <span class="variable">{{ operator_address }}</span>, на обработку своих персональных данных со следующими условиями:</p>
+    </div>
+
+    <div class="section">
+        <h2>1. ПЕРЕЧЕНЬ ДАННЫХ</h2>
+        <p>1.1. Согласие распространяется на следующие персональные данные, которые я предоставляю при использовании сайта <span class="variable">{{ site_name }}</span>:</p>
+        <ul>
+            <li>Имя и/или фамилия</li>
+            <li>Адрес электронной почты</li>
+            <li>Номер телефона</li>
+            <li>Данные, автоматически передаваемые при использовании сайта (cookie, IP-адрес, информация о браузере)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. ЦЕЛИ ОБРАБОТКИ</h2>
+        <p>2.1. Персональные данные обрабатываются в следующих целях:</p>
+        <ul>
+            {% for purpose in data_purposes %}
+            <li>{{ purpose }}</li>
+            {% endfor %}
+            {% if data_purposes_other %}
+            <li>{{ data_purposes_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. СРОК ДЕЙСТВИЯ СОГЛАСИЯ</h2>
+        <p>3.1. Настоящее согласие действует в течение: <span class="variable">{{ consent_duration }}{% if consent_duration_custom %} ({{ consent_duration_custom }}){% endif %}</span> с момента его предоставления.</p>
+        <p>3.2. Согласие может быть отозвано мной в любое время путём направления соответствующего уведомления.</p>
+    </div>
+
+    <div class="section">
+        <h2>4. СПОСОБ ОТЗЫВА СОГЛАСИЯ</h2>
+        <p>4.1. Я могу отозвать настоящее согласие следующим способом: <span class="variable">{{ withdrawal_method }}{% if withdrawal_method_custom %} ({{ withdrawal_method_custom }}){% endif %}</span>.</p>
+        <p>4.2. Контактные данные для отзыва согласия:</p>
+        <ul>
+            <li>Email: <span class="variable">{{ contact_email }}</span></li>
+            <li>Адрес: <span class="variable">{{ operator_address }}</span></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h2>
+        <p>5.1. Обработка персональных данных осуществляется в соответствии с законодательством о персональных данных.</p>
+        <p>5.2. Предоставляя свои персональные данные, я подтверждаю, что ознакомлен(а) с Политикой конфиденциальности сайта <span class="variable">{{ site_name }}</span>.</p>
+    </div>
+
+    <div class="section" style="margin-top: 1cm; page-break-before: always;">
+        <p><span class="checkbox"></span> <b>Я даю согласие на обработку моих персональных данных</b></p>
+        <p style="margin-top: 0.5cm;">Дата: <span class="variable">{{ consent_date }}</span></p>
+        <p>Пользователь: ____________________ / _________________ /</p>
+        <p style="font-size: 10pt; color: #666;">(подпись) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (расшифровка)</p>
+    </div>
+</body>
+</html>

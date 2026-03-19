@@ -1,0 +1,175 @@
+[
+  {
+    "step": "bot_name",
+    "text": "🤖 Название бота:",
+    "type": "text",
+    "required": true,
+    "example": "Мой помощник",
+    "hint": "Как называется ваш бот"
+  },
+  {
+    "step": "bot_username",
+    "text": "🔗 Юзернейм бота (ссылка):",
+    "type": "text",
+    "required": true,
+    "example": "@mybot",
+    "hint": "Например: @mybot"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Владелец бота — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование владельца:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН владельца:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП владельца:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес владельца:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "support@mybot.ru"
+  },
+  {
+    "step": "advertising_tools",
+    "text": "📊 Какие рекламные инструменты используете? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Яндекс.Метрика",
+      "✅ Яндекс.Директ",
+      "✅ Пиксель ВКонтакте",
+      "✅ Таргетированная реклама",
+      "✅ Ретаргетинг",
+      "✅ Вебвизор",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "advertising_tools_other",
+    "text": "📝 Укажите другие инструменты:",
+    "type": "text",
+    "required": false,
+    "example": "MyTarget, TikTok Pixel",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "advertising_tools": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "data_collected",
+    "text": "📋 Какие данные собираются для рекламы? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ ID пользователя в Telegram",
+      "✅ IP-адрес",
+      "✅ Информация о браузере",
+      "✅ Информация об устройстве",
+      "✅ Действия в боте (команды, клики)",
+      "✅ Время взаимодействия",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_collected_other",
+    "text": "📝 Укажите другие данные:",
+    "type": "text",
+    "required": false,
+    "example": "Геолокация, реферер",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "data_collected": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "consent_collection",
+    "text": "✅ Как получаете согласие на рекламу:",
+    "type": "single_select",
+    "options": [
+      "✅ Сообщение при старте бота",
+      "✅ Галочка в форме",
+      "✅ Отдельная команда согласия",
+      "✅ Все вышеперечисленное"
+    ],
+    "required": true
+  },
+  {
+    "step": "opt_out_method",
+    "text": "🚫 Как пользователь может отказаться:",
+    "type": "single_select",
+    "options": [
+      "✅ Команда в боте (например, /noads)",
+      "✅ По запросу на email",
+      "✅ Через настройки бота",
+      "✅ Все способы"
+    ],
+    "required": true
+  },
+  {
+    "step": "third_party_sharing",
+    "text": "🤝 Передаёте ли данные рекламным партнёрам?",
+    "type": "single_select",
+    "options": [
+      "❌ Нет, не передаём",
+      "✅ Да, только агрегированные данные",
+      "✅ Да, в том числе персональные"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_storage_location",
+    "text": "🌍 Где хранятся данные:",
+    "type": "single_select",
+    "options": [
+      "🇷🇺 Только на серверах в РФ",
+      "🌐 На серверах в РФ и за рубежом"
+    ],
+    "required": true
+  }
+]

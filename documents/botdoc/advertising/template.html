@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Согласие на рекламу для бота</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 1cm;
+            color: #000;
+        }
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5cm;
+        }
+        h2 {
+            font-size: 12pt;
+            margin-top: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+        p {
+            text-align: justify;
+            margin: 0.2cm 0;
+        }
+        ul {
+            margin: 0.2cm 0;
+            padding-left: 1cm;
+        }
+        li {
+            margin-bottom: 0.1cm;
+        }
+        .section {
+            margin-bottom: 0.5cm;
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 1cm;
+        }
+        .variable {
+            font-weight: bold;
+        }
+        .checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #000;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>СОГЛАСИЕ НА ИСПОЛЬЗОВАНИЕ РЕКЛАМНЫХ ТЕХНОЛОГИЙ</h1>
+        <p>Telegram-бота <span class="variable">{{ bot_name }}</span> (<span class="variable">{{ bot_username }}</span>)</p>
+    </div>
+
+    <div class="section">
+        <p>Я, действуя свободно, своей волей и в своём интересе, даю своё согласие <span class="variable">{{ operator_name }}</span> (ИНН <span class="variable">{{ operator_inn }}</span>{% if operator_ogrn %}, ОГРН/ОГРНИП <span class="variable">{{ operator_ogrn }}</span>{% endif %}), адрес: <span class="variable">{{ operator_address }}</span>, на использование рекламных и аналитических технологий со следующими условиями:</p>
+    </div>
+
+    <div class="section">
+        <h2>1. РЕКЛАМНЫЕ ИНСТРУМЕНТЫ</h2>
+        <p>1.1. В боте используются следующие рекламные и аналитические инструменты:</p>
+        <ul>
+            {% for tool in advertising_tools %}
+            <li>{{ tool }}</li>
+            {% endfor %}
+            {% if advertising_tools_other %}
+            <li>{{ advertising_tools_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. СОБИРАЕМЫЕ ДАННЫЕ</h2>
+        <p>2.1. Для целей рекламы и аналитики собираются следующие данные:</p>
+        <ul>
+            {% for data in data_collected %}
+            <li>{{ data }}</li>
+            {% endfor %}
+            {% if data_collected_other %}
+            <li>{{ data_collected_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. ПОЛУЧЕНИЕ СОГЛАСИЯ</h2>
+        <p>3.1. Согласие на использование рекламных технологий получается следующим способом: <span class="variable">{{ consent_collection }}</span>.</p>
+        <p>3.2. Согласие действует до момента его отзыва пользователем.</p>
+    </div>
+
+    <div class="section">
+        <h2>4. ОТКАЗ ОТ ИСПОЛЬЗОВАНИЯ</h2>
+        <p>4.1. Я могу отказаться от использования рекламных технологий следующим способом: <span class="variable">{{ opt_out_method }}</span>.</p>
+        <p>4.2. Отказ не влияет на возможность использования основных функций бота.</p>
+    </div>
+
+    <div class="section">
+        <h2>5. ПЕРЕДАЧА ДАННЫХ</h2>
+        {% if third_party_sharing == "❌ Нет, не передаём" %}
+        <p>5.1. Данные не передаются третьим лицам для рекламных целей.</p>
+        {% elif third_party_sharing == "✅ Да, только агрегированные данные" %}
+        <p>5.1. Данные передаются рекламным партнёрам только в агрегированном (обезличенном) виде для целей аналитики.</p>
+        {% elif third_party_sharing == "✅ Да, в том числе персональные" %}
+        <p>5.1. Данные могут передаваться рекламным партнёрам, в том числе персональные данные, для целей таргетированной рекламы.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>6. ХРАНЕНИЕ ДАННЫХ</h2>
+        {% if data_storage_location == "🇷🇺 Только на серверах в РФ" %}
+        <p>6.1. Все персональные данные хранятся и обрабатываются на серверах, расположенных на территории Российской Федерации.</p>
+        {% else %}
+        <p>6.1. Персональные данные хранятся на серверах в Российской Федерации и могут передаваться на серверы за пределами РФ при наличии согласия пользователя.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>7. КОНТАКТЫ</h2>
+        <p>7.1. Для вопросов, связанных с рекламой и аналитикой, вы можете обратиться:</p>
+        <ul>
+            <li>Email: <span class="variable">{{ contact_email }}</span></li>
+            <li>Адрес: <span class="variable">{{ operator_address }}</span></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h2>
+        <p>8.1. Владелец оставляет за собой право изменять список рекламных инструментов и партнёров.</p>
+        <p>8.2. Актуальная информация о используемых технологиях доступна в Политике конфиденциальности бота.</p>
+        <p>8.3. Бот работает на платформе Telegram. Пользователь принимает во внимание, что Telegram как платформа имеет свою политику конфиденциальности.</p>
+    </div>
+
+    <div class="section" style="margin-top: 1cm; page-break-before: always;">
+        <p><span class="checkbox"></span> <b>Я даю согласие на использование рекламных технологий</b></p>
+        <p style="margin-top: 0.5cm;">Дата: <span class="variable">{{ consent_date }}</span></p>
+        <p>Пользователь: ____________________ / _________________ /</p>
+        <p style="font-size: 10pt; color: #666;">(подпись) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (расшифровка)</p>
+    </div>
+</body>
+</html>

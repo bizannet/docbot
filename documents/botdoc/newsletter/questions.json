@@ -1,0 +1,187 @@
+[
+  {
+    "step": "bot_name",
+    "text": "🤖 Название бота:",
+    "type": "text",
+    "required": true,
+    "example": "Мой помощник",
+    "hint": "Как называется ваш бот"
+  },
+  {
+    "step": "bot_username",
+    "text": "🔗 Юзернейм бота (ссылка):",
+    "type": "text",
+    "required": true,
+    "example": "@mybot",
+    "hint": "Например: @mybot"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Владелец бота — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование владельца:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН владельца:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП владельца:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес владельца:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "support@mybot.ru"
+  },
+  {
+    "step": "newsletter_types",
+    "text": "📬 Какие типы рассылок вы планируете? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Сообщения в боте",
+      "✅ Email-рассылка",
+      "✅ SMS-рассылка",
+      "✅ Push-уведомления",
+      "✅ Только транзакционные сообщения",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "newsletter_types_other",
+    "text": "📝 Укажите другие типы рассылок:",
+    "type": "text",
+    "required": false,
+    "example": "Viber-рассылка, звонки",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "newsletter_types": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "newsletter_content",
+    "text": "📋 Что будет в рассылках? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Новости компании",
+      "✅ Акции и скидки",
+      "✅ Новые товары / услуги",
+      "✅ Полезные материалы",
+      "✅ Персональные предложения",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "newsletter_content_other",
+    "text": "📝 Укажите другое содержимое:",
+    "type": "text",
+    "required": false,
+    "example": "Приглашения на мероприятия",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "newsletter_content": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "newsletter_frequency",
+    "text": "⏱️ Как часто будете рассылать:",
+    "type": "single_select",
+    "options": [
+      "Не чаще 1 раза в неделю",
+      "Не чаще 2 раз в месяц",
+      "Не чаще 1 раза в месяц",
+      "Другая частота (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "newsletter_frequency_custom",
+    "text": "📝 Укажите частоту:",
+    "type": "text",
+    "required": false,
+    "example": "Не чаще 3 раз в неделю",
+    "hint": "Напишите частоту полностью",
+    "conditional": {
+      "show_if": {
+        "newsletter_frequency": "Другая частота (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "unsubscribe_method",
+    "text": "🚫 Как пользователь может отписаться:",
+    "type": "single_select",
+    "options": [
+      "✅ Команда в боте (например, /stop)",
+      "✅ Кнопка «Отписаться» в сообщении",
+      "✅ По запросу на email",
+      "✅ Все способы"
+    ],
+    "required": true
+  },
+  {
+    "step": "consent_collection",
+    "text": "✅ Как получаете согласие на рассылку:",
+    "type": "single_select",
+    "options": [
+      "✅ Галочка при старте бота",
+      "✅ Галочка при оформлении заказа",
+      "✅ Отдельная команда подписки",
+      "✅ Все вышеперечисленное"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_storage_location",
+    "text": "🌍 Где хранятся данные:",
+    "type": "single_select",
+    "options": [
+      "🇷🇺 Только на серверах в РФ",
+      "🌐 На серверах в РФ и за рубежом"
+    ],
+    "required": true
+  }
+]

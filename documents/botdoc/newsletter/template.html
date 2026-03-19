@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Согласие на рассылку для бота</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 1cm;
+            color: #000;
+        }
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5cm;
+        }
+        h2 {
+            font-size: 12pt;
+            margin-top: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+        p {
+            text-align: justify;
+            margin: 0.2cm 0;
+        }
+        ul {
+            margin: 0.2cm 0;
+            padding-left: 1cm;
+        }
+        li {
+            margin-bottom: 0.1cm;
+        }
+        .section {
+            margin-bottom: 0.5cm;
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 1cm;
+        }
+        .variable {
+            font-weight: bold;
+        }
+        .checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #000;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-info">
+        <h1>СОГЛАСИЕ НА РАССЫЛКУ</h1>
+        <p>на получение информационных и рекламных материалов</p>
+        <p>Telegram-бота <span class="variable">{{ bot_name }}</span> (<span class="variable">{{ bot_username }}</span>)</p>
+    </div>
+
+    <div class="section">
+        <p>Я, действуя свободно, своей волей и в своём интересе, даю своё согласие <span class="variable">{{ operator_name }}</span> (ИНН <span class="variable">{{ operator_inn }}</span>{% if operator_ogrn %}, ОГРН/ОГРНИП <span class="variable">{{ operator_ogrn }}</span>{% endif %}), адрес: <span class="variable">{{ operator_address }}</span>, на получение информационных и рекламных рассылок со следующими условиями:</p>
+    </div>
+
+    <div class="section">
+        <h2>1. КАНАЛЫ РАССЫЛКИ</h2>
+        <p>1.1. Согласие распространяется на следующие каналы связи:</p>
+        <ul>
+            {% for channel in newsletter_types %}
+            <li>{{ channel }}</li>
+            {% endfor %}
+            {% if newsletter_types_other %}
+            <li>{{ newsletter_types_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. СОДЕРЖАНИЕ РАССЫЛОК</h2>
+        <p>2.1. Я буду получать следующие материалы:</p>
+        <ul>
+            {% for content in newsletter_content %}
+            <li>{{ content }}</li>
+            {% endfor %}
+            {% if newsletter_content_other %}
+            <li>{{ newsletter_content_other }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. ЧАСТОТА РАССЫЛОК</h2>
+        <p>3.1. Рассылки будут приходить с частотой: <span class="variable">{{ newsletter_frequency }}{% if newsletter_frequency_custom %} ({{ newsletter_frequency_custom }}){% endif %}</span>.</p>
+    </div>
+
+    <div class="section">
+        <h2>4. ОТПИСКА ОТ РАССЫЛКИ</h2>
+        <p>4.1. Я могу отписаться от рассылки в любое время следующим способом: <span class="variable">{{ unsubscribe_method }}</span>.</p>
+        <p>4.2. Отписка не влияет на возможность использования основных функций бота.</p>
+    </div>
+
+    <div class="section">
+        <h2>5. ПОЛУЧЕНИЕ СОГЛАСИЯ</h2>
+        <p>5.1. Согласие на рассылку получается следующим способом: <span class="variable">{{ consent_collection }}</span>.</p>
+        <p>5.2. Согласие действует до момента его отзыва пользователем.</p>
+    </div>
+
+    <div class="section">
+        <h2>6. ХРАНЕНИЕ ДАННЫХ</h2>
+        {% if data_storage_location == "🇷🇺 Только на серверах в РФ" %}
+        <p>6.1. Все персональные данные хранятся и обрабатываются на серверах, расположенных на территории Российской Федерации.</p>
+        {% else %}
+        <p>6.1. Персональные данные хранятся на серверах в Российской Федерации и могут передаваться на серверы за пределами РФ при наличии согласия пользователя.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>7. КОНТАКТЫ</h2>
+        <p>7.1. Для вопросов, связанных с рассылкой, вы можете обратиться:</p>
+        <ul>
+            <li>Email: <span class="variable">{{ contact_email }}</span></li>
+            <li>Адрес: <span class="variable">{{ operator_address }}</span></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h2>
+        <p>8.1. Владелец обязуется не передавать контактные данные третьим лицам для целей рассылки без отдельного согласия пользователя.</p>
+        <p>8.2. Настоящее согласие вступает в силу с момента его предоставления.</p>
+    </div>
+
+    <div class="section" style="margin-top: 1cm; page-break-before: always;">
+        <p><span class="checkbox"></span> <b>Я даю согласие на получение рассылок</b></p>
+        <p style="margin-top: 0.5cm;">Дата: <span class="variable">{{ consent_date }}</span></p>
+        <p>Пользователь: ____________________ / _________________ /</p>
+        <p style="font-size: 10pt; color: #666;">(подпись) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (расшифровка)</p>
+    </div>
+</body>
+</html>

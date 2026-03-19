@@ -1,0 +1,210 @@
+[
+  {
+    "step": "bot_name",
+    "text": "🤖 Название бота:",
+    "type": "text",
+    "required": true,
+    "example": "Мой помощник",
+    "hint": "Как называется ваш бот"
+  },
+  {
+    "step": "bot_username",
+    "text": "🔗 Юзернейм бота (ссылка):",
+    "type": "text",
+    "required": true,
+    "example": "@mybot",
+    "hint": "Например: @mybot"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Владелец бота — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true,
+    "hint": "Выберите ваш статус"
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование владельца:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»",
+    "hint": "Как вы указаны в ЕГРИП/ЕГРЮЛ или ФИО полностью"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН владельца:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП владельца:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес владельца:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "privacy@mybot.ru"
+  },
+  {
+    "step": "contact_phone",
+    "text": "📞 Телефон для обращений (необязательно):",
+    "type": "text",
+    "required": false,
+    "validate": "phone",
+    "example": "+7 (999) 123-45-67",
+    "skip_button": true
+  },
+  {
+    "step": "data_collected",
+    "text": "📋 Какие данные собирает бот? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ ID пользователя в Telegram",
+      "✅ Имя / Фамилия (из профиля Telegram)",
+      "✅ Юзернейм (@username)",
+      "✅ Номер телефона (если запрашивается)",
+      "✅ Текст сообщений пользователя",
+      "✅ Дата и время взаимодействия",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true,
+    "hint": "Отметьте всё, что собирает ваш бот"
+  },
+  {
+    "step": "data_collected_other",
+    "text": "📝 Укажите другие данные:",
+    "type": "text",
+    "required": false,
+    "example": "Геолокация, файлы, фото",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "data_collected": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "processing_purposes",
+    "text": "🎯 Для чего обрабатываете данные? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Предоставление функционала бота",
+      "✅ Обратная связь с пользователем",
+      "✅ Рассылка уведомлений",
+      "✅ Аналитика и улучшение бота",
+      "✅ Идентификация пользователя",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "processing_purposes_other",
+    "text": "📝 Укажите другие цели:",
+    "type": "text",
+    "required": false,
+    "example": "Проведение опросов, персонализация",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "processing_purposes": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "data_retention",
+    "text": "⏱️ Как долго храните данные пользователей:",
+    "type": "single_select",
+    "options": [
+      "До отзыва согласия пользователем",
+      "3 года",
+      "5 лет",
+      "Другой срок (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_retention_custom",
+    "text": "📝 Укажите срок хранения:",
+    "type": "text",
+    "required": false,
+    "example": "1 год с момента последнего взаимодействия",
+    "hint": "Напишите срок полностью",
+    "conditional": {
+      "show_if": {
+        "data_retention": "Другой срок (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "third_parties",
+    "text": "🤝 Передаёте ли вы данные третьим лицам?",
+    "type": "single_select",
+    "options": [
+      "❌ Нет, не передаём",
+      "✅ Да, перечислю кому"
+    ],
+    "required": true
+  },
+  {
+    "step": "third_parties_list",
+    "text": "📝 Кому передаёте данные:",
+    "type": "text",
+    "required": false,
+    "example": "Яндекс.Метрика, платёжные системы, CRM",
+    "hint": "Перечислите всех, кому могут передаваться данные",
+    "conditional": {
+      "show_if": {
+        "third_parties": "✅ Да, перечислю кому"
+      }
+    }
+  },
+  {
+    "step": "telegram_disclosure",
+    "text": "📱 Учитывать, что Telegram (платформа) получает данные?",
+    "type": "single_select",
+    "options": [
+      "✅ Да, указать в политике",
+      "❌ Нет"
+    ],
+    "required": true,
+    "hint": "Telegram как платформа имеет доступ к данным пользователей"
+  },
+  {
+    "step": "data_storage_location",
+    "text": "🌍 Где хранятся данные:",
+    "type": "single_select",
+    "options": [
+      "🇷🇺 Только на серверах в РФ",
+      "🌐 На серверах в РФ и за рубежом"
+    ],
+    "required": true
+  }
+]

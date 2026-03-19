@@ -1,0 +1,221 @@
+[
+  {
+    "step": "bot_name",
+    "text": "🤖 Название бота:",
+    "type": "text",
+    "required": true,
+    "example": "Мой помощник",
+    "hint": "Как называется ваш бот"
+  },
+  {
+    "step": "bot_username",
+    "text": "🔗 Юзернейм бота (ссылка):",
+    "type": "text",
+    "required": true,
+    "example": "@mybot",
+    "hint": "Например: @mybot"
+  },
+  {
+    "step": "operator_type",
+    "text": "👤 Владелец бота — кто вы:",
+    "type": "single_select",
+    "options": [
+      "ИП",
+      "ООО",
+      "Физ. лицо (самозанятый)",
+      "Физ. лицо (не самозанятый)"
+    ],
+    "required": true
+  },
+  {
+    "step": "operator_name",
+    "text": "📝 Полное наименование владельца:",
+    "type": "text",
+    "required": true,
+    "example": "ИП Иванова Мария Петровна / ООО «Ромашка»"
+  },
+  {
+    "step": "operator_inn",
+    "text": "🔢 ИНН владельца:",
+    "type": "text",
+    "required": true,
+    "validate": "inn",
+    "example": "123456789012"
+  },
+  {
+    "step": "operator_ogrn",
+    "text": "🔢 ОГРН/ОГРНИП владельца:",
+    "type": "text",
+    "required": false,
+    "validate": "ogrn",
+    "example": "317774600000000",
+    "skip_button": true,
+    "conditional": {
+      "show_if": {
+        "operator_type": ["ИП", "ООО"]
+      }
+    }
+  },
+  {
+    "step": "operator_address",
+    "text": "🏠 Юридический адрес владельца:",
+    "type": "text",
+    "required": true,
+    "example": "123456, г. Москва, ул. Ленина, д. 10"
+  },
+  {
+    "step": "contact_email",
+    "text": "📧 Email для обращений:",
+    "type": "text",
+    "required": true,
+    "validate": "email",
+    "example": "support@mybot.ru"
+  },
+  {
+    "step": "bot_purpose",
+    "text": "🎯 Для чего предназначен бот? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Продажа товаров / услуг",
+      "✅ Информационный бот",
+      "✅ Бот для записи / бронирования",
+      "✅ Образовательный бот",
+      "✅ Развлекательный бот",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "bot_purpose_other",
+    "text": "📝 Укажите другое назначение:",
+    "type": "text",
+    "required": false,
+    "example": "Бот для проведения опросов",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "bot_purpose": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "user_obligations",
+    "text": "📋 Обязанности пользователя (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Предоставлять достоверную информацию",
+      "✅ Не нарушать права других пользователей",
+      "✅ Не использовать бот в незаконных целях",
+      "✅ Не спамить в боте",
+      "✅ Не передавать доступ третьим лицам",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "user_obligations_other",
+    "text": "📝 Укажите другие обязанности:",
+    "type": "text",
+    "required": false,
+    "example": "Не использовать автоматические скрипты",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "user_obligations": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "prohibited_actions",
+    "text": "🚫 Что запрещено в боте? (выберите все нужные):",
+    "type": "multi_select",
+    "options": [
+      "✅ Отправлять незаконный контент",
+      "✅ Взламывать или нарушать работу бота",
+      "✅ Выдавать себя за другого пользователя",
+      "✅ Использовать бот для мошенничества",
+      "✅ Отправлять спам через бота",
+      "✅ Другое (укажу вручную)"
+    ],
+    "required": true
+  },
+  {
+    "step": "prohibited_actions_other",
+    "text": "📝 Укажите другие запреты:",
+    "type": "text",
+    "required": false,
+    "example": "Не использовать бот для майнинга",
+    "hint": "Если выбрали «Другое» — напишите, что именно",
+    "conditional": {
+      "show_if": {
+        "prohibited_actions": "✅ Другое (укажу вручную)"
+      }
+    }
+  },
+  {
+    "step": "liability_limit",
+    "text": "⚖️ Ограничение ответственности владельца:",
+    "type": "single_select",
+    "options": [
+      "✅ Владелец не несёт ответственности за действия пользователей",
+      "✅ Владелец не гарантирует бесперебойную работу бота",
+      "✅ Владелец не отвечает за контент третьих лиц",
+      "✅ Все вышеперечисленное"
+    ],
+    "required": true
+  },
+  {
+    "step": "dispute_resolution",
+    "text": "🤝 Порядок разрешения споров:",
+    "type": "single_select",
+    "options": [
+      "✅ Досудебный порядок (претензия)",
+      "✅ Суд по месту нахождения владельца",
+      "✅ Суд по месту жительства пользователя",
+      "✅ Арбитраж"
+    ],
+    "required": true
+  },
+  {
+    "step": "agreement_changes",
+    "text": "🔄 Как уведомляем об изменениях в соглашении:",
+    "type": "single_select",
+    "options": [
+      "✅ Публикация в боте",
+      "✅ Уведомление на email",
+      "✅ И то, и другое"
+    ],
+    "required": true
+  },
+  {
+    "step": "agreement_acceptance",
+    "text": "✅ Как пользователь принимает соглашение:",
+    "type": "single_select",
+    "options": [
+      "✅ Галочка при старте бота",
+      "✅ Использование бота = согласие",
+      "✅ И то, и другое"
+    ],
+    "required": true
+  },
+  {
+    "step": "telegram_disclosure",
+    "text": "📱 Учитывать, что Telegram (платформа) имеет свои правила?",
+    "type": "single_select",
+    "options": [
+      "✅ Да, указать в соглашении",
+      "❌ Нет"
+    ],
+    "required": true
+  },
+  {
+    "step": "data_storage_location",
+    "text": "🌍 Где хранятся данные:",
+    "type": "single_select",
+    "options": [
+      "🇷🇺 Только на серверах в РФ",
+      "🌐 На серверах в РФ и за рубежом"
+    ],
+    "required": true
+  }
+]
