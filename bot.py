@@ -8,6 +8,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.types import ErrorEvent
+from aiogram.fsm.storage.memory import MemoryStorage  # ← ДОБАВИЛИ
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from config import TOKEN, STATS_GROUP_ID, TIMEZONE, LOGS_DIR, STATS_DB, ADMIN_ID
@@ -99,12 +100,15 @@ async def main():
     init_stats_table()
     logger.info("📊 Таблица статистики инициализирована")
 
+    # Настройка хранилища для FSM (состояний) ← ЭТО ГЛАВНОЕ ИСПРАВЛЕНИЕ
+    storage = MemoryStorage()
+
     # Инициализация бота и диспетчера
     bot = Bot(
         token=TOKEN,
         default=DefaultBotProperties(parse_mode=ParseMode.HTML)
     )
-    dp = Dispatcher()
+    dp = Dispatcher(storage=storage)  # ← Передали storage сюда
 
     # Регистрация обработчика ошибок
     dp.errors.register(on_error)
